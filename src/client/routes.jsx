@@ -1,12 +1,11 @@
 "use strict";
 
 var React = require("react");
-var { Route, DefaultRoute, Redirect } = require("react-router");
+var { Route, DefaultRoute } = require("react-router");
 
 var Routes = (
-  <Route>
+  <Route handler={require("./layout/shell")}>
     <DefaultRoute name="Home" handler={require("./App")} />
-    <Redirect from="foo" to="Home" />
   </Route>
 );
 

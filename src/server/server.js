@@ -4,7 +4,10 @@ var express = require("express");
 var path = require("path");
 
 var React = require("react");
+var ReactDocumentTitle = require("react-document-title");
 var Router = require("react-router");
+
+var head = React.createFactory(require("../client/layout/head"));
 var routes = require("../client/routes");
 
 var server = express();
@@ -35,12 +38,14 @@ server.use(function(req, res) {
     }), null);
   });
 
-  // Render <head> to string
-  //var head = React.renderToStaticMarkup(Head({title: title}));
+  // Resets the document title on each request
+  // See https://github.com/gaearon/react-document-title#server-usage
+  var title = ReactDocumentTitle.rewind();
 
   // Write the response
+  res.write("<!doctype html>");
   res.write("<html>");
-  //res.write(head);
+  res.write(React.renderToStaticMarkup(head({title: title})));
   res.write("<body>");
   res.write(content);
   res.write("</body>");
