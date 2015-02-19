@@ -10,7 +10,7 @@ var DEBUG = !argv.release;
 var client = {
   cache: DEBUG,
   debug: DEBUG,
-  devtool: DEBUG ? "#inline-source-map" : false,
+  devtool: DEBUG ? "eval" : "hidden-source-map",
 
   entry: [
     "webpack-dev-server/client?http://localhost:9090",
@@ -45,13 +45,17 @@ var client = {
     ],
     loaders: [
       {
+        test: /\.jsx?$/,
+        loaders: ["react-hot", "babel-loader?experimental"],
+        exclude: /node_modules/
+      },
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass")
       },
       {
-        test: /\.jsx?$/,
-        loaders: ["react-hot", "babel-loader?experimental"],
-        exclude: /node_modules/
+        test: /\.png$/,
+        loader: "url-loader?limit=10000&mimetype=image/png"
       }
     ]
   }
@@ -60,7 +64,7 @@ var client = {
 var server = {
   cache: DEBUG,
   debug: DEBUG,
-  devtool: DEBUG ? "#inline-source-map" : false,
+  devtool: DEBUG ? "eval" : "hidden-source-map",
 
   entry: "./src/server/server.js",
   output: {

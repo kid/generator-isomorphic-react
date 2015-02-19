@@ -5,7 +5,7 @@ var { Route, DefaultRoute } = require("react-router");
 
 var Routes = (
   <Route handler={require("./layout/shell")}>
-    <DefaultRoute name="Home" handler={require("./App")} />
+    <DefaultRoute name="Home" handler={require("./app")} />
   </Route>
 );
 
