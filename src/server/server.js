@@ -1,15 +1,15 @@
-require("babel/register");
+'use strict';
 
-var express = require("express");
-var path = require("path");
+var express = require('express');
+var path = require('path');
 
-var React = require("react");
-var Router = require("react-router");
+var React = require('react');
+var Router = require('react-router');
 var routes = require('../client/routes');
 
 var server = express();
 
-server.use('/assets', express.static(path.join(__dirname, '..', '..', 'build', 'assets')));
+server.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 server.use(function(req, res, next) {
   // We customize the onAbort method in order to handle redirects
@@ -47,12 +47,12 @@ server.use(function(req, res, next) {
 
   // In development, the compiled javascript is served by a WebpackDevServer, which lets us 'hot load' scripts in for live editing.
   if (process.env.NODE_ENV === 'development') {
-    res.write('<script src="http://localhost:9090/build/assets/bundle.js" defer></script>');
+    res.write('<script src="http://localhost:9090/build/assets/client.js" defer></script>');
   }
 
-  // In production, we just serve the pre-compiled assets from the /build directory
+  // In production, we just serve the pre-compiled assets from the /build/assets directory
   if (process.env.NODE_ENV === 'production') {
-    res.write('<script src="/assets/bundle.js" defer></script>');
+    res.write('<script src="/assets/client.js" defer></script>');
   }
 
   res.write('</html>');
