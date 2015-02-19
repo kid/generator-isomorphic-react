@@ -1,6 +1,8 @@
 "use strict";
 
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 var argv = require("minimist")(process.argv.slice(2));
 
 var DEBUG = !argv.release;
@@ -21,29 +23,38 @@ var client = {
     sourcePrefix: "  ",
     publicPath: "http://localhost:9090/build/assets/"
   },
-  plugins: [
+  plugins: DEBUG ? [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new ExtractTextPlugin("client.css")
+  ] : [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new ExtractTextPlugin("client.css")
   ],
   resolve: {
     extensions: ["", ".js", ".jsx"]
   },
   module: {
-    preLoaders: [{
-      test: /\.jsx?$/,
-      loader: "jsxhint-loader",
-      exclude: /node_modules/
-    }],
-    loaders: [{
-      test: /\.css$/,
-      loader: "style-loader!css-loader",
-      exclude: /node_modules/
-    }, {
-      test: /\.jsx?$/,
-      loaders: ["react-hot", "babel-loader?experimental"],
-      exclude: /node_modules/
-    }]
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: "jsxhint-loader",
+        exclude: /node_modules/
+      }
+    ],
+    loaders: [
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ["react-hot", "babel-loader?experimental"],
+        exclude: /node_modules/
+      }
+    ]
   }
 };
 
@@ -69,16 +80,20 @@ var server = {
     extensions: ["", ".js", ".jsx"]
   },
   module: {
-    preLoaders: [{
-      test: /\.jsx?$/,
-      loader: "jsxhint-loader",
-      exclude: /node_modules/
-    }],
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: "babel-loader?experimental",
-      exclude: /node_modules/
-    }]
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: "jsxhint-loader",
+        exclude: /node_modules/
+      }
+    ],
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: "babel-loader?experimental",
+        exclude: /node_modules/
+      }
+    ]
   }
 };
 

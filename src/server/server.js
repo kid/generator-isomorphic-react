@@ -14,6 +14,11 @@ var server = express();
 
 server.use("/assets", express.static(path.join(__dirname, "assets")));
 
+server.use("/favicon.ico", function(req, res) {
+  res.set("Content-Type", "image/x-icon");
+  res.end();
+});
+
 server.use(function(req, res) {
   // We customize the onAbort method in order to handle redirects
   var router = Router.create({
@@ -38,14 +43,15 @@ server.use(function(req, res) {
     }), null);
   });
 
-  // Resets the document title on each request
-  // See https://github.com/gaearon/react-document-title#server-usage
-  var title = ReactDocumentTitle.rewind();
+  var headContent = React.renderToStaticMarkup(head({
+    title: ReactDocumentTitle.rewind(),
+    urlPrefix: process.env.NODE_ENV === "development" ? "http://localhost:9090/build/" : ""
+  }));
 
   // Write the response
   res.write("<!doctype html>");
   res.write("<html>");
-  res.write(React.renderToStaticMarkup(head({title: title})));
+  res.write(headContent);
   res.write("<body>");
   res.write(content);
   res.write("</body>");
