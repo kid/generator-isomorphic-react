@@ -8,7 +8,11 @@ var Shell = React.createClass({
   render: function() {
     return (
       <Title title="My App">
-        <RouteHandler />
+        <div className="row">
+          <div className="small-12 columns">
+            <RouteHandler />
+          </div>
+        </div>
       </Title>
     );
   }

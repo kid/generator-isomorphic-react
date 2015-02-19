@@ -46,8 +46,7 @@ var client = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
-        exclude: /node_modules/
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass")
       },
       {
         test: /\.jsx?$/,
