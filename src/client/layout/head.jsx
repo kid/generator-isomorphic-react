@@ -3,6 +3,9 @@
 var React = require("react");
 var PureRenderMixin = require("react/addons").addons.PureRenderMixin;
 
+/**
+ * Only used server side
+ */
 var Head = React.createClass({
   displayName: "Head",
 
@@ -10,18 +13,30 @@ var Head = React.createClass({
 
   propTypes: {
     title: React.PropTypes.string.isRequired,
-    urlPrefix: React.PropTypes.string.isRequired
+    scripts: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    stylesheets: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
   },
 
   render: function() {
-    var stylesheet = this.props.urlPrefix + "assets/client.css";
+    var scripts = {};
+    var stylesheets = {};
+    
+    this.props.scripts.forEach((url, index) => (
+      stylesheets["script-" + index] = <script src={url} defer></script>
+    ));
+
+    this.props.stylesheets.forEach((url, index) => (
+      stylesheets["stylesheet-" + index] = <link href={url} rel="stylesheet" />
+    ));
+
     return (
       <head>
         <meta charSet="utf-8" />
         <title>{this.props.title}</title>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-        <link href={stylesheet} rel="stylesheet" />
+        {scripts}
+        {stylesheets}
       </head>
     );
   }

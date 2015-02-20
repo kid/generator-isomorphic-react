@@ -43,9 +43,11 @@ server.use(function(req, res) {
     }), null);
   });
 
+  var urlPrefix = process.env.NODE_ENV === "development" ? "http://localhost:9090/build/" : "";
   var headContent = React.renderToStaticMarkup(head({
     title: ReactDocumentTitle.rewind(),
-    urlPrefix: process.env.NODE_ENV === "development" ? "http://localhost:9090/build/" : ""
+    scripts: [ urlPrefix + "assets/client.js" ],
+    stylesheets: [ urlPrefix + "assets/client.css" ]
   }));
 
   // Write the response
@@ -55,17 +57,6 @@ server.use(function(req, res) {
   res.write("<body>");
   res.write(content);
   res.write("</body>");
-
-  // In development, the compiled javascript is served by a WebpackDevServer, which lets us "hot load" scripts in for live editing.
-  if (process.env.NODE_ENV === "development") {
-    res.write("<script src=\"http://localhost:9090/build/assets/client.js\" defer></script>");
-  }
-
-  // In production, we just serve the pre-compiled assets from the /build/assets directory
-  if (process.env.NODE_ENV === "production") {
-    res.write("<script src=\"assets/client.js\" defer></script>");
-  }
-
   res.write("</html>");
   res.end();
 });
