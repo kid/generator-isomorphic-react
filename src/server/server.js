@@ -7,6 +7,8 @@ var server = express();
 require("./favicon")(server);
 require("./logging")(server);
 require("./assets")(server);
+
+require("./api/routes")(server, { prefix: "/api" });
 require("./rendering")(server);
 
 var port = process.env.PORT || 8080;

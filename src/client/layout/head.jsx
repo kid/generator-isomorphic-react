@@ -17,7 +17,7 @@ var Head = React.createClass({
     stylesheets: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
   },
 
-  render: function() {
+  render() {
     var scripts = {};
     var stylesheets = {};
     

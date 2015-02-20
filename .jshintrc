@@ -16,6 +16,7 @@
 
   "globals": {
     "require": false,
+    "fetch": false,
     "__dirname": false
   }
 }
