@@ -1,6 +1,6 @@
 "use strict";
 
-require("./app.scss");
+require("./client.scss");
 
 var React = require("react");
 var Router = require("react-router");

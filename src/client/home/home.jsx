@@ -2,7 +2,7 @@
 
 var React = require("react");
 
-var App = React.createClass({
+var Home = React.createClass({
   render() {
     return (
       <h1>Hello, World!</h1>
@@ -10,4 +10,4 @@ var App = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = Home;
