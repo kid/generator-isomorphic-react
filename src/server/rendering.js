@@ -8,7 +8,7 @@ var head = React.createFactory(require("../client/layout/head"));
 var routes = require("../client/routes");
 
 module.exports = function(server) {
-  server.use(function(req, res) {
+  server.get("*", function(req, res) {
     // We customize the onAbort method in order to handle redirects
     var router = Router.create({
       routes: routes,
@@ -23,7 +23,6 @@ module.exports = function(server) {
       }
     });
 
-    
     // Run the router, and render the result to string
     var bodyContent = "";
     router.run(function(Handler, state) {
