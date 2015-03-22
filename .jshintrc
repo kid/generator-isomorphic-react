@@ -18,6 +18,8 @@
     "require": false,
     "fetch": false,
     "__dirname": false,
-    "__HOT_MODE__": false 
+    "__DEV__": false,
+    "__HOT__": false,
+    "__SERVER__": false
   }
 }

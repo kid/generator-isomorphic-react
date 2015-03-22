@@ -70,7 +70,7 @@ var client = update(common, {
       new ExtractTextPlugin(DEBUG ? "client.css" : "client.[hash].css"),
       new webpack.DefinePlugin({
         "__DEV__": DEBUG,
-        "__HOT_MODE__": HOT,
+        "__HOT__": HOT,
         "__SERVER__": false
       })
     ].concat(DEBUG ? [
@@ -130,7 +130,7 @@ var server = update(common, {
     $push: [
       new webpack.DefinePlugin({
         "__DEV__": DEBUG,
-        "__HOT_MODE__": HOT,
+        "__HOT__": HOT,
         "__SERVER__": true,
       })
     ]
