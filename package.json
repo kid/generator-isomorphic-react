@@ -18,8 +18,12 @@
     "good-console": "^4.1.0",
     "hapi": "^8.4.0",
     "isomorphic-fetch": "^2.0.0",
+    "object-assign": "^2.0.0",
+    "pubsub-js": "^1.5.2",
     "react": "^0.13.1",
     "react-document-title": "^1.0.2",
+    "react-foundation-apps": "^0.6.0",
+    "react-responsive-mixin": "^0.3.3",
     "react-router": "^0.13.1"
   },
   "devDependencies": {

@@ -14,6 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "zurb/bower-foundation#~5.5.1"
+    "foundation-apps": "~1.1.0"
   }
 }

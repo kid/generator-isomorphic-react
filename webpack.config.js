@@ -89,7 +89,7 @@ var client = update(common, {
         {
           test: /\.jsx?$/,
           loaders: HOT ? ["react-hot", "babel-loader?experimental"] : ["babel-loader?experimental"],
-          exclude: /node_modules/
+          exclude: /node_modules(?!\/react-foundation-apps)/
         },
         {
           test: /\.scss$/,
@@ -142,7 +142,7 @@ var server = update(common, {
         {
           test: /\.jsx?$/,
           loader: "babel-loader?experimental",
-          exclude: /node_modules/
+          exclude: /node_modules(?!\/react-foundation-apps)/
         }
       ]
     }
