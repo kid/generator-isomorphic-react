@@ -1,8 +1,10 @@
 {
   "html": {
+    "indent_char": " ",
     "indent_size": 2
   },
   "css": {
+    "indent_char": " ",
     "indent_size": 2,
     "end_with_newline": true,
     "newline_between_rules": true,
@@ -10,8 +12,9 @@
   },
   "js": {
     "allowed_file_extensions": ["js", "jsx", "json", "jshintrc", "jsbeautifyrc"],
-    "brace_style": "end-expand",
+    "brace_style": "collapse",
     "end_with_newline": true ",
+    "indent_char": " ",
     "indent_size": 2,
     "keep_array_indentation": true,
     "space_after_anon_function": true

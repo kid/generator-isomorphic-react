@@ -9,12 +9,8 @@ var Home = React.createClass({
   statics: {
     fetchData() {
       return fetch("http://localhost:8080/api/hello")
-        .then(res => {
-          return res.json();
-        })
-        .catch(error => {
-          throw new Error(error);
-        });
+        .then(res => res.json())
+        .catch(error => { throw new Error(error); });
     }
   },
 

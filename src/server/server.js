@@ -1,19 +1,57 @@
 "use strict";
 
-var express = require("express");
-var server = express();
+var Hapi = require("hapi");
+var Path = require("path");
 
-// Note that favicon is done first because we don't want theses requests loggued
-require("./favicon")(server);
-require("./logging")(server);
-require("./assets")(server);
+var server = new Hapi.Server({
+  connections: {
+    routes: {
+      files: {
+        relativeTo: Path.join(__dirname, "assets")
+      }
+    }
+  }
+});
 
-require("./api/routes")(server, { prefix: "/api" });
-require("./rendering")(server);
+server.connection({
+  host: "localhost",
+  port: parseInt(process.env.PORT, 10) ||  8080
+});
 
-var port = process.env.PORT || 8080;
-server.listen(port);
+var goodOptions = {
+  opsInterval: 1000,
+  reporters: [{
+    reporter: require("good-console"),
+    args: [{
+      log: "*",
+      error: "*",
+      request: "*",
+      response: "*"
+    }]
+  }]
+};
 
-if (process.env.NODE_ENV === "development") {
-  console.log("server.js is listening on port " + port);
-}
+server.register([
+  {
+    register: require("good"),
+    options: goodOptions
+  },
+  {
+    register: require("./statics")
+  },
+  {
+    register: require("./api")
+  },
+  {
+    register: require("./render")
+  }
+], function (err) {
+  if (err) {
+    console.error("error", err);
+  } else {
+    server.start(() => console.info("Server started at " + server.info.uri));
+  }
+});
+
+// require("./rendering")(server);
+

@@ -7,6 +7,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var argv = require("minimist")(process.argv.slice(2));
 
 var DEBUG = !argv.release;
+var HOT = DEBUG && argv.hot;
 
 var common = {
   output: {
@@ -38,6 +39,13 @@ var common = {
         loader: "jsxhint-loader",
         exclude: /node_modules/
       }
+    ],
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: "json-loader",
+        exclude: /node_modules/
+      }
     ]
   }
 };
@@ -53,15 +61,16 @@ var client = update(common, {
 
   output: {
     path: { $set: __dirname + "/build/assets/" },
-    filename: { $set: "client.js" },
-    publicPath: { $set: DEBUG ? "http://localhost:9090/build/assets/" : "./build/assets/" }
+    filename: { $set: DEBUG ? "client.js" : "client.[hash].js" },
+    publicPath: { $set: HOT ? "http://localhost:9090/build/assets/" : "./build/assets/" }
   },
 
   plugins: {
     $push: [
-      new ExtractTextPlugin("client.css"),
+      new ExtractTextPlugin(DEBUG ? "client.css" : "client.[hash].css"),
       new webpack.DefinePlugin({
         "__DEV__": DEBUG,
+        "__HOT_MODE__": HOT,
         "__SERVER__": false
       })
     ].concat(DEBUG ? [
@@ -76,10 +85,10 @@ var client = update(common, {
 
   module: {
     loaders: {
-      $set: [
+      $push: [
         {
           test: /\.jsx?$/,
-          loaders: DEBUG ? ["react-hot", "babel-loader?experimental"] : ["babel-loader?experimental"],
+          loaders: HOT ? ["react-hot", "babel-loader?experimental"] : ["babel-loader?experimental"],
           exclude: /node_modules/
         },
         {
@@ -113,7 +122,7 @@ var server = update(common, {
       __dirname: false,
       console: false,
       global: false,
-      process: false,
+      process: false
     }
   },
 
@@ -121,14 +130,15 @@ var server = update(common, {
     $push: [
       new webpack.DefinePlugin({
         "__DEV__": DEBUG,
-        "__SERVER__": true
+        "__HOT_MODE__": HOT,
+        "__SERVER__": true,
       })
     ]
   },
   
   module: {
     loaders: {
-      $set: [
+      $push: [
         {
           test: /\.jsx?$/,
           loader: "babel-loader?experimental",

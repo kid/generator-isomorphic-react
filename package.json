@@ -5,16 +5,19 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "bower install && webpack --release --colors",
-    "build": "webpack --release --colors",
-    "watch": "node dev.js"
+    "build": "rm -Rf build && webpack --release --colors",
+    "watch": "rm -Rf build && node dev.js --hot",
+    "clean": "rm -Rf build"
   },
   "author": "Arnaud Rebts <arnaud.rebts@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "boom": "^2.6.1",
     "es6-promise": "^2.0.1",
-    "express": "^4.11.2",
+    "good": "^5.1.2",
+    "good-console": "^4.1.0",
+    "hapi": "^8.4.0",
     "isomorphic-fetch": "^2.0.0",
-    "morgan": "^1.5.1",
     "react": "^0.13.1",
     "react-document-title": "^1.0.2",
     "react-router": "^0.13.1"
@@ -24,9 +27,11 @@
     "babel-loader": "^4.0.0",
     "bower": "^1.3.12",
     "css-loader": "^0.9.1",
+    "express": "^4.12.3",
     "extract-text-webpack-plugin": "^0.3.8",
     "file-loader": "^0.8.1",
     "jshint": "^2.6.3",
+    "json-loader": "^0.5.1",
     "jsxhint-loader": "^0.2.0",
     "minimist": "^1.1.0",
     "nodemon": "^1.3.7",

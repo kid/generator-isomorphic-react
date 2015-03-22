@@ -17,6 +17,7 @@
   "globals": {
     "require": false,
     "fetch": false,
-    "__dirname": false
+    "__dirname": false,
+    "__HOT_MODE__": false 
   }
 }

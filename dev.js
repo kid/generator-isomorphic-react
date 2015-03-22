@@ -32,7 +32,7 @@ new WebpackDevServer(webpack(clientConfig), {
 });
 
 var serverBuilt = false;
-webpack(serverConfig).watch(300, function(err, stats) {
+webpack(serverConfig).watch(300, function (err, stats) {
   if (!serverBuilt) {
     startNodemon();
   }
@@ -48,9 +48,13 @@ webpack(serverConfig).watch(300, function(err, stats) {
 
 function startNodemon() {
   nodemon({
-    env: { "NODE_ENV": "development" },
+    env: {
+      "NODE_ENV": "development",
+      "HOT_MODE": true
+    },
     watch: path.join("build", "server.js"),
     script: path.join("build", "server.js"),
     ignore: path.join("build", "assets")
   });
 }
+

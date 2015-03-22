@@ -1,7 +1,8 @@
 "use strict";
 
 var React = require("react");
-var PureRenderMixin = require("react/addons").addons.PureRenderMixin;
+var Addons = require("react/addons").addons;
+var PureRenderMixin = Addons.PureRenderMixin;
 
 /**
  * Only used server side
@@ -28,6 +29,9 @@ var Head = React.createClass({
     this.props.stylesheets.forEach((url, index) => (
       stylesheets["stylesheet-" + index] = <link href={url} rel="stylesheet" />
     ));
+
+    scripts = Addons.createFragment(scripts);
+    stylesheets = Addons.createFragment(stylesheets);
 
     return (
       <head>
