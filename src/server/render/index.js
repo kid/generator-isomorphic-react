@@ -14,4 +14,3 @@ register.attributes = {
 };
 
 module.exports.register = register;
-
