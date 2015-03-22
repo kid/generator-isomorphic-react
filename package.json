@@ -1,5 +1,5 @@
 {
-  "name": "isomorphic",
+  "name": "torrentBox",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "build": "webpack --release --colors",
     "watch": "node dev.js"
   },
-  "author": "",
+  "author": "Arnaud Rebts <arnaud.rebts@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "es6-promise": "^2.0.1",
