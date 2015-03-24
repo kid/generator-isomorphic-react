@@ -1,8 +1,8 @@
 "use strict";
 
-var Path = require("path");
+import Path from "path";
 
-module.exports = function (server) {
+export default function (server) {
   server.route({
     method: "GET",
     path: "/assets/{path*}",
@@ -20,5 +20,4 @@ module.exports = function (server) {
       }
     }
   });
-};
-
+}

@@ -1,6 +1,6 @@
 "use strict";
 
-function register(server, options, next) {
+export function register(server, options, next) {
   require("./favicon")(server);
   require("./assets")(server);
 
@@ -13,6 +13,3 @@ register.attributes = {
     version: require("../../../package.json").version,
   }
 };
-
-module.exports.register = register;
-

@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(server) {
+export default function (server) {
   server.route({
     method: "GET",
     path: "/favicon.ico",
@@ -14,4 +14,4 @@ module.exports = function(server) {
       }
     }
   });
-};
+}

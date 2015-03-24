@@ -1,6 +1,6 @@
 "use strict";
 
-function register(server, options, next) {
+export function register(server, options, next) {
   server.route({
     method: "GET",
     path: "/api/hello",
@@ -20,6 +20,3 @@ register.attributes = {
     version: require("../../../package.json").version,
   }
 };
-
-module.exports.register = register;
-

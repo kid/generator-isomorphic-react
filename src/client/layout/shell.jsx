@@ -1,10 +1,10 @@
 "use strict";
 
-var React = require("react");
-var Title = require("react-document-title");
-var RouteHandler = require("react-router").RouteHandler;
-var Trigger = require("react-foundation-apps/lib/trigger");
-var Offcanvas = require("react-foundation-apps/lib/offcanvas");
+import React from "react";
+import Title from "react-document-title";
+import { RouteHandler } from "react-router";
+import Trigger from "react-foundation-apps/lib/trigger";
+import Offcanvas from "react-foundation-apps/lib/offcanvas";
 
 var Shell = React.createClass({
   render() {
@@ -25,7 +25,7 @@ var Shell = React.createClass({
               <Trigger toggle="left-offcanvas">
                 <a className="button">Menu</a>
               </Trigger>
-          
+
               <RouteHandler {...this.props} />
             </div>
           </div>
@@ -35,4 +35,4 @@ var Shell = React.createClass({
   }
 });
 
-module.exports = Shell;
+export default Shell;

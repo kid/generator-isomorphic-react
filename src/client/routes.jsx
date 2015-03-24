@@ -1,7 +1,7 @@
 "use strict";
 
-var React = require("react");
-var { Route, DefaultRoute } = require("react-router");
+import React from "react";
+import { Route, DefaultRoute } from "react-router";
 
 var Routes = (
   <Route handler={require("./layout/shell")}>
@@ -9,4 +9,4 @@ var Routes = (
   </Route>
 );
 
-module.exports = Routes;
+export default Routes;

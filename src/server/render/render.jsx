@@ -1,17 +1,17 @@
 "use strict";
 
-var Fs = require("fs");
-var Boom = require("boom");
-var Path = require("path");
+import Fs from "fs";
+import Boom from "boom";
+import Path from "path";
 
-var React = require("react");
-var ReactDocumentTitle = require("react-document-title");
-var Router = require("react-router");
+import React from "react";
+import ReactDocumentTitle from "react-document-title";
+import Router from "react-router";
 
-var head = React.createFactory(require("../../client/layout/head"));
-var routes = require("../../client/routes");
+import Head from "../../client/layout/head";
+import routes from "../../client/routes";
 
-var fetchData = require("../../common/utils/fetch-data");
+import fetchData from "../../common/utils/fetch-data";
 
 // In development mode, we serve static files from the hot-load-server.
 var assets = __HOT__ ? [
@@ -44,15 +44,14 @@ module.exports = function (server) {
       router.run(function (Handler, state) {
         fetchData(state.routes, state.params)
           .then(data => {
-            var bodyContent = React.renderToString(React.createElement(Handler, {
-              data: data
-            }), null);
+            var bodyContent = React.renderToString(<Handler data={data} />);
 
-            var headContent = React.renderToStaticMarkup(head({
-              title: ReactDocumentTitle.rewind(),
-              scripts: scripts,
-              stylesheets: stylesheets
-            }));
+            var headContent = React.renderToStaticMarkup(
+              <Head 
+                title={ReactDocumentTitle.rewind()}
+                scripts={scripts}
+                stylesheets={stylesheets} />
+            );
 
             // Write the response
             var content = [

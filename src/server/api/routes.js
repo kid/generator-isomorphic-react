@@ -1,6 +1,5 @@
 "use strict";
 
-module.exports = function (server, options) {
+export default function (server, options) {
   server.get(options.prefix + "/hello", require("./hello").sayHello);
 };
-

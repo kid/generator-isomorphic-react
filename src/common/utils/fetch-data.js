@@ -19,4 +19,4 @@ function fetchData(routes, params) {
   .catch(() => errors);
 }
 
-module.exports = fetchData;
+export default fetchData;
