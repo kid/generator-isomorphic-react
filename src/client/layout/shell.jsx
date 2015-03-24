@@ -3,6 +3,8 @@
 var React = require("react");
 var Title = require("react-document-title");
 var RouteHandler = require("react-router").RouteHandler;
+var Trigger = require("react-foundation-apps/lib/trigger");
+var Offcanvas = require("react-foundation-apps/lib/offcanvas");
 
 var Shell = React.createClass({
   render() {
@@ -10,9 +12,22 @@ var Shell = React.createClass({
 
     return (
       <Title title="My App">
-        <div className="row">
-          <div className="small-12 columns">
-            <RouteHandler {...this.props} />
+        <div>
+          <Offcanvas id="left-offcanvas" position="left">
+            <Trigger close="">
+              <a className="close-button">&times;</a>
+            </Trigger>
+            <br />
+            <p>This is offcanvas menu</p>
+          </Offcanvas>
+          <div className="grid-frame">
+            <div className="small-12 columns">
+              <Trigger toggle="left-offcanvas">
+                <a className="button">Menu</a>
+              </Trigger>
+          
+              <RouteHandler {...this.props} />
+            </div>
           </div>
         </div>
       </Title>
