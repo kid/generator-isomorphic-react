@@ -2,11 +2,11 @@
 
 require("./client.scss");
 
-var React = require("react");
-var Router = require("react-router");
+import React from "react";
+import Router from "react-router";
 
-var routes = require("./routes");
-var fetchData = require("../common/utils/fetch-data");
+import routes from "./routes";
+import fetchData from "../common/utils/fetch-data";
 
 Router.run(routes, Router.HistoryLocation, function (Handler, state) {
   fetchData(state.routes, state).then(data => {

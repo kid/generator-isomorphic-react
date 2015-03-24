@@ -1,8 +1,8 @@
 "use strict";
 
-var React = require("react");
-var Title = require("react-document-title");
-var RouteHandler = require("react-router").RouteHandler;
+import React from "react";
+import Title from "react-document-title";
+import { RouteHandler } from "react-router";
 
 var Shell = React.createClass({
   render() {
@@ -20,4 +20,4 @@ var Shell = React.createClass({
   }
 });
 
-module.exports = Shell;
+export default Shell;

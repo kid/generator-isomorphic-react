@@ -1,7 +1,7 @@
 "use strict";
 
-var React = require("react");
-var Addons = require("react/addons").addons;
+import React from "react";
+import { addons as Addons } from "react/addons";
 var PureRenderMixin = Addons.PureRenderMixin;
 
 /**
@@ -46,4 +46,4 @@ var Head = React.createClass({
   }
 });
 
-module.exports = Head;
+export default Head;

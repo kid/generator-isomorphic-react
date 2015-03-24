@@ -1,7 +1,7 @@
 "use strict";
 
-var Hapi = require("hapi");
-var Path = require("path");
+import Hapi from "hapi";
+import Path from "path";
 
 var server = new Hapi.Server({
   connections: {
@@ -52,6 +52,3 @@ server.register([
     server.start(() => console.info("Server started at " + server.info.uri));
   }
 });
-
-// require("./rendering")(server);
-
